@@ -10,5 +10,4 @@ public class ChallengeRecord {
     private String id;
     private String status;
     private String text;
-
 }
