@@ -1,25 +1,43 @@
 package com.raisin.zyurkalov.challenge.entities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeObjectMapper;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 class ChallengeRecordTest {
 
-    @Test
-    void converting() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "{\"id\":\"841ed78790c9224d1643bf3d45ae14b9\",\"status\":\"ok\"}";
 
-        ChallengeRecord record = mapper.readValue(json, ChallengeRecord.class);
-        assertEquals("ok", record.getStatus().toString(), "Status is converted ");
+
+    static ChallengeObjectMapper jsonMapper = new ChallengeRecordJsonMapper();
+    static ChallengeObjectMapper xmlMapper = new ChallengeRecordXmlMapper();
+
+    private static Stream<Arguments> provideArguments() {
+        return Stream.of(
+                Arguments.of("{\"id\":\"841ed78790c9224d1643bf3d45ae14b9\",\"status\":\"ok\"}", jsonMapper),
+                Arguments.of(
+                        "<msg><id value=\"841ed78790c9224d1643bf3d45ae14b9\"/></msg>", xmlMapper)
+        );
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("provideArguments")
+    void converting(String rawData, ChallengeObjectMapper mapper) throws JsonProcessingException {
+        ChallengeRecord record = mapper.mapToObject(rawData);
         assertEquals("841ed78790c9224d1643bf3d45ae14b9", record.getId(), "Id is converted");
 
-        String returnedJson = mapper.writeValueAsString(record);
-        assertEquals(json, returnedJson, "The json string converted back is the same as the original");
-
+        String returnedRawData = mapper.mapToString(record);
+        assertEquals(rawData, returnedRawData, "The json string converted back is the same as the original");
 
     }
 }
