@@ -49,12 +49,16 @@ class ConcreteJsonSourceTest {
 
         ConcreteSource concreteSource = new FakeConcreteJsonSource();
 
+
         concreteSource.setExceptionHolder(exceptionsHolder);
         var mapper = new ChallengeRecordJsonMapper();
         mapper.setExceptionsHolder(exceptionsHolder);
         concreteSource.setMapper(mapper);
 
-        List<ChallengeRecord> list = concreteSource.getChallengeRecords().collectList().blockOptional().get();
+        CombinedSource combinedSource = new CombinedSource(concreteSource);
+        combinedSource.setExceptionHolder(exceptionsHolder);
+
+        List<ChallengeRecord> list = combinedSource.getChallengeRecords().collectList().blockOptional().get();
 
         assertEquals(3, list.size(), "Number of returned records is 3");
         assertTrue(atomicInteger.get() > 0, "We have json parsing errors");
