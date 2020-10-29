@@ -1,6 +1,5 @@
 package com.raisin.zyurkalov.challenge.entities;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeObjectMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
@@ -14,7 +13,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class ChallengeRecordTest {
+class ChallengeObjectMapperTest {
 
 
 
@@ -32,7 +31,7 @@ class ChallengeRecordTest {
 
     @ParameterizedTest
     @MethodSource("provideArguments")
-    void converting(String rawData, ChallengeObjectMapper mapper) throws JsonProcessingException {
+    void converting(String rawData, ChallengeObjectMapper mapper) {
         ChallengeRecord record = mapper.mapToObject(rawData);
         assertEquals("841ed78790c9224d1643bf3d45ae14b9", record.getId(), "Id is converted");
 
