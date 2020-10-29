@@ -1,5 +1,6 @@
 package com.raisin.zyurkalov.challenge;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeObjectMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
@@ -51,13 +52,13 @@ class ChallengeObjectMapperTest {
     }
 
     @Test
-    void handlingErrorsTest() throws InterruptedException {
+    void handlingErrorsTest() {
         ExceptionsHolder exceptionsHolder = new ExceptionsHolder();
 
         final AtomicInteger atomicInteger = new AtomicInteger();
-        Disposable disposable = exceptionsHolder.getExceptions().subscribe(
-                (Exception x) -> atomicInteger.incrementAndGet()
-        );
+        Disposable disposable = exceptionsHolder.getExceptions()
+                .filter(e -> e instanceof JsonProcessingException)
+                .subscribe((Exception x) -> atomicInteger.incrementAndGet());
 
         var jsonMapper = new ChallengeRecordJsonMapper();
         jsonMapper.setExceptionsHolder(exceptionsHolder);

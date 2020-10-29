@@ -8,8 +8,8 @@ import java.time.Duration;
 
 
 public class ExceptionsHolder {
-    private WorkQueueProcessor<Exception> exceptions;
-    private FluxSink<Exception> sink;
+    private final WorkQueueProcessor<Exception> exceptions;
+    private final FluxSink<Exception> sink;
 
     public ExceptionsHolder() {
         exceptions = WorkQueueProcessor.<Exception>builder().build();
