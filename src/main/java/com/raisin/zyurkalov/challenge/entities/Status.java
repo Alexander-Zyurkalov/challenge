@@ -7,7 +7,7 @@ public enum Status {
     OK("ok"),
 
     @JsonProperty("fail")
-    FAIL("done"),
+    FAIL("fail"),
 
     @JsonProperty("done")
     DONE("done");
