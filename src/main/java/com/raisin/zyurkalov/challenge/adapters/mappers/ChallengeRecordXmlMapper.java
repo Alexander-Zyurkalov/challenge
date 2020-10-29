@@ -7,6 +7,7 @@ import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.xml_entities.Id;
 import com.raisin.zyurkalov.challenge.adapters.mappers.xml_entities.XmlChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
+import com.raisin.zyurkalov.challenge.entities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,7 @@ public class ChallengeRecordXmlMapper implements ChallengeObjectMapper {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ChallengeRecord("FAIL", Status.FAIL);
     }
 
     @Override

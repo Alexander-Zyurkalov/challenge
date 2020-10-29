@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
+import com.raisin.zyurkalov.challenge.entities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class ChallengeRecordJsonMapper implements ChallengeObjectMapper {
         } catch (JsonProcessingException e) {
             exceptionsHolder.addException(e);
         }
-        return null;
+        return new ChallengeRecord("FAIL", Status.FAIL);
     }
 
     @Override

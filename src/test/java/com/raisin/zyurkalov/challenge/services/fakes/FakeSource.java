@@ -1,5 +1,6 @@
 package com.raisin.zyurkalov.challenge.services.fakes;
 
+import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.Status;
 import com.raisin.zyurkalov.challenge.services.Source;
@@ -15,5 +16,10 @@ public class FakeSource implements Source {
                 new ChallengeRecord("5eb8c026a5a4c2dea2e6f010155a04c4", Status.OK),
         };
         return Flux.fromArray(records);
+    }
+
+    @Override
+    public void setExceptionHolder(ExceptionsHolder exceptionsHolder) {
+
     }
 }
