@@ -3,9 +3,11 @@ package com.raisin.zyurkalov.challenge.adapters.mappers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.xml_entities.Id;
 import com.raisin.zyurkalov.challenge.adapters.mappers.xml_entities.XmlChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,6 +15,7 @@ public class ChallengeRecordXmlMapper implements ChallengeObjectMapper {
 
     static ObjectMapper mapper = new XmlMapper();
 
+    ExceptionsHolder exceptionsHolder;
 
     @Override
     public String mapToString(ChallengeRecord object) {
@@ -37,6 +40,11 @@ public class ChallengeRecordXmlMapper implements ChallengeObjectMapper {
         return null;
     }
 
+    @Override
+    public ExceptionsHolder getExceptionsHolder() {
+        return exceptionsHolder;
+    }
+
     private ChallengeRecord toChallengeRecord(XmlChallengeRecord xmlChallengeRecord) {
         return new ChallengeRecord(xmlChallengeRecord.getId().value, null);
     }
@@ -46,5 +54,11 @@ public class ChallengeRecordXmlMapper implements ChallengeObjectMapper {
                 new Id(object.getId())
         );
     }
+
+    @Autowired
+    public void setExceptionsHolder(ExceptionsHolder exceptionsHolder) {
+        this.exceptionsHolder = exceptionsHolder;
+    }
+
 
 }
