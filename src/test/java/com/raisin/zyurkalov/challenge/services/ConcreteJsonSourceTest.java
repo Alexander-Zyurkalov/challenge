@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class FakeConcreteJsonSource extends ConcreteSource {
@@ -31,7 +30,7 @@ class FakeConcreteJsonSource extends ConcreteSource {
     @Override
     protected Mono<String> requestToUrl() {
         if (list.isEmpty())
-            return Mono.just("{\"status\": \"done\",  \"id\": \"0affd6558f58850cdb518a686d6409a4\"}");
+            return Mono.just("{\"status\": \"done\"}");
         else
             return Mono.just(list.remove(0));
     }
@@ -47,7 +46,7 @@ class ConcreteJsonSourceTest {
                 .filter(e -> e instanceof JsonProcessingException)
                 .subscribe((Exception x) -> atomicInteger.incrementAndGet());
 
-        ConcreteSource concreteSource = new FakeConcreteJsonSource();
+        ConcreteSource concreteSource = new FakeConcreteXmlSource();
 
 
         concreteSource.setExceptionHolder(exceptionsHolder);
@@ -61,7 +60,7 @@ class ConcreteJsonSourceTest {
         List<ChallengeRecord> list = combinedSource.getChallengeRecords().collectList().blockOptional().get();
 
         assertEquals(3, list.size(), "Number of returned records is 3");
-        assertTrue(atomicInteger.get() > 0, "We have json parsing errors");
+        assertEquals(1, atomicInteger.get() , "We have json parsing errors");
 
     }
 }

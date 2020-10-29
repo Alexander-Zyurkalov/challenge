@@ -2,8 +2,8 @@ package com.raisin.zyurkalov.challenge;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
-import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeObjectMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import org.junit.jupiter.api.Test;
@@ -18,11 +18,11 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class ChallengeObjectMapperTest {
+class ChallengeRecordMapperTest {
 
 
-    static ChallengeObjectMapper jsonMapper = new ChallengeRecordJsonMapper();
-    static ChallengeObjectMapper xmlMapper = new ChallengeRecordXmlMapper();
+    static ChallengeRecordMapper jsonMapper = new ChallengeRecordJsonMapper();
+    static ChallengeRecordMapper xmlMapper = new ChallengeRecordXmlMapper();
 
     private static Stream<Arguments> provideArguments() {
         return Stream.of(
@@ -42,7 +42,7 @@ class ChallengeObjectMapperTest {
 
     @ParameterizedTest()
     @MethodSource("provideArguments")
-    void converting(String rawData, ChallengeObjectMapper mapper) {
+    void converting(String rawData, ChallengeRecordMapper mapper) {
         ChallengeRecord record = mapper.mapToObject(rawData);
         assertEquals("841ed78790c9224d1643bf3d45ae14b9", record.getId(), "Id is converted");
 

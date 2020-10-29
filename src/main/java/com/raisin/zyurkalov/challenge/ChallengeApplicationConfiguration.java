@@ -1,6 +1,7 @@
 package com.raisin.zyurkalov.challenge;
 
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
+import com.raisin.zyurkalov.challenge.services.CombinedSource;
 import com.raisin.zyurkalov.challenge.services.ConcreteSource;
 import com.raisin.zyurkalov.challenge.services.Source;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ public class ChallengeApplicationConfiguration {
 
     @Bean
     public Source getSource() {
-        return new ConcreteSource(URL_A);
+        return new CombinedSource(new ConcreteSource(URL_A));
     }
 
 

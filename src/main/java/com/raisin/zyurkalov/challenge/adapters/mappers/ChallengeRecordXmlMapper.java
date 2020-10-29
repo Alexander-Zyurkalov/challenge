@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChallengeRecordXmlMapper implements ChallengeObjectMapper {
+public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
 
     static ObjectMapper mapper = new XmlMapper();
 
