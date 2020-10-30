@@ -42,8 +42,6 @@ public class ChallengeApplication {
     @Bean
     CommandLineRunner run() {
         return (evt) -> {
-//            var list = source.getChallengeRecords().collectList().block();
-//            exceptionsHolder.getExceptions().subscribe(System.out::println);
 
             Disposable disposable = source.getChallengeRecords().subscribe(
                     record -> {
