@@ -5,6 +5,7 @@ import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
 import com.raisin.zyurkalov.challenge.services.CombinedSource;
 import com.raisin.zyurkalov.challenge.services.ConcreteSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,15 +21,18 @@ public class ChallengeApplicationConfiguration {
         return new CombinedSource(getSourceA(),getSourceB());
     }
 
+    @Bean
+    @Qualifier("getChallengeRecordJsonMapper")
     public ConcreteSource getSourceA(){
         var source = new ConcreteSource(URL_A);
-        source.setMapper(new ChallengeRecordJsonMapper());
+        source.setMapper(getChallengeRecordJsonMapper());
         return  source;
     }
 
+    @Bean
     public ConcreteSource getSourceB(){
         var source = new ConcreteSource(URL_B);
-        source.setMapper(new ChallengeRecordXmlMapper());
+        source.setMapper(getChallengeRecordXmlMapper());
         return  source;
     }
 
@@ -37,4 +41,13 @@ public class ChallengeApplicationConfiguration {
         return new ExceptionsHolder();
     }
 
+    @Bean
+    public ChallengeRecordJsonMapper getChallengeRecordJsonMapper() {
+        return new ChallengeRecordJsonMapper();
+    }
+
+    @Bean
+    public ChallengeRecordXmlMapper getChallengeRecordXmlMapper() {
+        return new ChallengeRecordXmlMapper();
+    }
 }

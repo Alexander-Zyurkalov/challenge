@@ -4,16 +4,19 @@ import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.Status;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
 
+@Component
 public class ConcreteSource implements Source {
 
     private String url;
 
-    public ConcreteSource(String url) {
+    public ConcreteSource(@Autowired(required = false) String url) {
         this.url = url;
     }
 
@@ -24,6 +27,7 @@ public class ConcreteSource implements Source {
         this.mapper = mapper;
     }
 
+    @Autowired
     @Override
     public void setExceptionHolder(ExceptionsHolder exceptionsHolder) {
         this.exceptionsHolder = exceptionsHolder;
@@ -45,8 +49,10 @@ public class ConcreteSource implements Source {
                                     );
                             if (record.getStatus() != Status.DONE)
                                 x.next(record);
-                        }
-                        catch (Exception e) {
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                            x.complete();
+                        } catch (Exception e) {
                             exceptionsHolder.addException(e);
                             x.complete();
                         }

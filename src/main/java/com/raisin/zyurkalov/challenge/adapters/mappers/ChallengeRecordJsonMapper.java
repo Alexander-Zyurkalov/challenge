@@ -17,7 +17,6 @@ public class ChallengeRecordJsonMapper implements ChallengeRecordMapper {
     @Override
     public ChallengeRecord mapToObject(String str) {
         try {
-            System.out.println("json");
             return mapper.readValue(str, ChallengeRecord.class);
         } catch (JsonProcessingException e) {
             exceptionsHolder.addException(e);
