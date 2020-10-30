@@ -26,10 +26,8 @@ public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
                 id = tree.findValue("id").findValue("value").asText();
             Status status = tree.has("done") ? Status.DONE : Status.OK;
             return new ChallengeRecord(id, status);
-//            XmlChallengeRecord xmlChallengeRecord = mapper.readValue(str, XmlChallengeRecord.class);
-//            return toChallengeRecord(xmlChallengeRecord);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            exceptionsHolder.addException(e);
         }
         return new ChallengeRecord("FAIL", Status.FAIL);
     }

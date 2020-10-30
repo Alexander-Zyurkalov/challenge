@@ -60,8 +60,8 @@ class ConcreteXmlSourceTest {
 
         List<ChallengeRecord> list = combinedSource.getChallengeRecords().collectList().blockOptional().get();
 
-        assertEquals(3, list.size(), "Number of returned records is 3");
-        assertEquals(1, atomicInteger.get() , "We have json parsing errors");
+        assertEquals(4, list.size(), "Number of returned records is 3");
+        assertEquals(2, atomicInteger.get() , "We have json parsing errors");
 
     }
 }
