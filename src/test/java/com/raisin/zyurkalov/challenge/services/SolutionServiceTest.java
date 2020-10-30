@@ -29,11 +29,11 @@ class SolutionServiceTest {
         records.forEach(solutionService::addRecord);
         assertEquals(
                 List.of("1", "5"),
-                solutionService.getJoined().map(ChallengeRecord::getId).sorted().collect(Collectors.toList())
+                solutionService.processJointed().map(ChallengeRecord::getId).sorted().collect(Collectors.toList())
         );
         assertEquals(
                 List.of("2", "3", "55", "6"),
-                solutionService.getOrphans().map(ChallengeRecord::getId).sorted().collect(Collectors.toList())
+                solutionService.processOrphans().map(ChallengeRecord::getId).sorted().collect(Collectors.toList())
         );
     }
 }

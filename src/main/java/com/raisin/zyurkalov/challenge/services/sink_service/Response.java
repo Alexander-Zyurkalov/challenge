@@ -1,5 +1,6 @@
-package com.raisin.zyurkalov.challenge.entities;
+package com.raisin.zyurkalov.challenge.services.sink_service;
 
+import com.raisin.zyurkalov.challenge.entities.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChallengeRecord {
-    private String id;
+public class Response {
     private Status status;
 }
