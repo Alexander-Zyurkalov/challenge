@@ -1,9 +1,10 @@
 package com.raisin.zyurkalov.challenge;
 
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
 import com.raisin.zyurkalov.challenge.services.CombinedSource;
 import com.raisin.zyurkalov.challenge.services.ConcreteSource;
-import com.raisin.zyurkalov.challenge.services.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,10 +16,21 @@ public class ChallengeApplicationConfiguration {
 
 
     @Bean
-    public Source getSource() {
-        return new CombinedSource(new ConcreteSource(URL_A));
+    public CombinedSource getSource() {
+        return new CombinedSource(getSourceA(),getSourceB());
     }
 
+    public ConcreteSource getSourceA(){
+        var source = new ConcreteSource(URL_A);
+        source.setMapper(new ChallengeRecordJsonMapper());
+        return  source;
+    }
+
+    public ConcreteSource getSourceB(){
+        var source = new ConcreteSource(URL_B);
+        source.setMapper(new ChallengeRecordXmlMapper());
+        return  source;
+    }
 
     @Bean
     public ExceptionsHolder getExceptionsHolder() {

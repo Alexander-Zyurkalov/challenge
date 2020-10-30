@@ -20,6 +20,7 @@ public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
     @Override
     public ChallengeRecord mapToObject(String str) {
         try {
+            System.out.println("xml");
             JsonNode tree = mapper.readTree(str);
             String id = "";
             if (tree.has("id") && tree.findValue("id").has("value"))

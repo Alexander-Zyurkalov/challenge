@@ -55,7 +55,7 @@ class ConcreteXmlSourceTest {
         mapper.setExceptionsHolder(exceptionsHolder);
         concreteSource.setMapper(mapper);
 
-        CombinedSource combinedSource = new CombinedSource(concreteSource);
+        CombinedSource combinedSource = new CombinedSource(concreteSource, null);
         combinedSource.setExceptionHolder(exceptionsHolder);
 
         List<ChallengeRecord> list = combinedSource.getChallengeRecords().collectList().blockOptional().get();
