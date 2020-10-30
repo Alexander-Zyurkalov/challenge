@@ -14,6 +14,6 @@ public class XmlChallengeRecord {
     @JacksonXmlProperty
     Id id;
 
-    @JacksonXmlProperty()
+    @JacksonXmlProperty(localName = "done")
     String done;
 }

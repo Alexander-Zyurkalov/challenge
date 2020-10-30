@@ -1,6 +1,7 @@
 package com.raisin.zyurkalov.challenge.adapters.mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
@@ -21,8 +22,14 @@ public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
     @Override
     public ChallengeRecord mapToObject(String str) {
         try {
-            XmlChallengeRecord xmlChallengeRecord = mapper.readValue(str, XmlChallengeRecord.class);
-            return toChallengeRecord(xmlChallengeRecord);
+            JsonNode tree = mapper.readTree(str);
+            String id = "";
+            if (tree.has("id") && tree.findValue("id").has("value"))
+                id = tree.findValue("id").findValue("value").asText();
+            Status status = tree.has("done") ? Status.DONE : Status.OK;
+            return new ChallengeRecord(id, status);
+//            XmlChallengeRecord xmlChallengeRecord = mapper.readValue(str, XmlChallengeRecord.class);
+//            return toChallengeRecord(xmlChallengeRecord);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
