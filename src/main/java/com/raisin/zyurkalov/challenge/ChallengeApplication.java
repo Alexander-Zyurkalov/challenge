@@ -1,7 +1,6 @@
 package com.raisin.zyurkalov.challenge;
 
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
-import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.Status;
 import com.raisin.zyurkalov.challenge.services.Kind;
 import com.raisin.zyurkalov.challenge.services.SinkService;
@@ -14,8 +13,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
+import reactor.core.Disposable;
 
 @SpringBootApplication
 public class ChallengeApplication {
@@ -47,27 +45,21 @@ public class ChallengeApplication {
 //            var list = source.getChallengeRecords().collectList().block();
 //            exceptionsHolder.getExceptions().subscribe(System.out::println);
 
-//            Disposable disposable = source.getChallengeRecords().subscribe(
-//                    record -> {
-//                        if (record.getStatus() == Status.OK)
-//                            solutionService.addRecord(record);
-//                    }
-//            );
-            List<ChallengeRecord> list = source.getChallengeRecords().collectList().block();
-            list.forEach(
+            Disposable disposable = source.getChallengeRecords().subscribe(
                     record -> {
                         if (record.getStatus() == Status.OK)
                             solutionService.addRecord(record);
                     }
             );
 
-//            while (!disposable.isDisposed()) {
-            solutionService.processJointed().forEach(
-                    r -> {
-                        sinkService.sendResult(Kind.JOINED, r.getId());
-                        System.out.println("Sending Joined: " + r.getId());
-                    }
-            );
+            while (!disposable.isDisposed() || solutionService.getNumberOfJoined() > 0) {
+                solutionService.processJointed().forEach(
+                        r -> {
+                            sinkService.sendResult(Kind.JOINED, r.getId());
+                            System.out.println("Sending Joined: " + r.getId());
+                        }
+                );
+            }
             solutionService.processOrphans().forEach(
                     r -> {
                         System.out.println("Sending Orphaned: " + r.getId());
@@ -75,11 +67,8 @@ public class ChallengeApplication {
                     }
             );
 
-//            }
-//            System.out.println(list);
 
             exceptionsHolder.awaitAndShutdown();
-//            solutionService.
         };
 
     }

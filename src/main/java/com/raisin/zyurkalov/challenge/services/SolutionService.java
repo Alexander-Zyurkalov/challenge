@@ -20,6 +20,13 @@ public class SolutionService {
             orphans.add(record);
         }
     }
+    public int getNumberOfOrphans() {
+        return orphans.size();
+    }
+
+    public int getNumberOfJoined() {
+        return joined.size();
+    }
 
     public Stream<ChallengeRecord> processOrphans() {
         return orphans.stream().peek(record -> {
