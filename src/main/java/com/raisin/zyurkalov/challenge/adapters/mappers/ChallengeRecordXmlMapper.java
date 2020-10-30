@@ -19,18 +19,6 @@ public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
     ExceptionsHolder exceptionsHolder;
 
     @Override
-    public String mapToString(ChallengeRecord object) {
-        XmlChallengeRecord xmlChallengeRecord = toXmlChallengeRecord(object);
-        try {
-            return mapper.writeValueAsString(xmlChallengeRecord);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    @Override
     public ChallengeRecord mapToObject(String str) {
         try {
             XmlChallengeRecord xmlChallengeRecord = mapper.readValue(str, XmlChallengeRecord.class);

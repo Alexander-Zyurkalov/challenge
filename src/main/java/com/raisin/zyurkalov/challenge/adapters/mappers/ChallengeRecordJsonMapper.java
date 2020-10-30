@@ -15,16 +15,6 @@ public class ChallengeRecordJsonMapper implements ChallengeRecordMapper {
     ExceptionsHolder exceptionsHolder;
 
     @Override
-    public String mapToString(ChallengeRecord object) {
-        try {
-            return mapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            exceptionsHolder.addException(e);
-        }
-        return null;
-    }
-
-    @Override
     public ChallengeRecord mapToObject(String str) {
         try {
             return mapper.readValue(str, ChallengeRecord.class);
