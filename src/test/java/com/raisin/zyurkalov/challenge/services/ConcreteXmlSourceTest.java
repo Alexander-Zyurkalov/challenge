@@ -1,7 +1,6 @@
 package com.raisin.zyurkalov.challenge.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import org.junit.jupiter.api.Test;

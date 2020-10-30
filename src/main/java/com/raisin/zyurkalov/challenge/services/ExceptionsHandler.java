@@ -1,6 +1,5 @@
 package com.raisin.zyurkalov.challenge.services;
 
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class ExceptionsHandler {
     }
 
     /**
-     * Since the handler is asynchronous, it might be usefull to call this method to wait before all the exceptions are
+     * Since the handler is asynchronous, it might be useful to call this method to wait before all the exceptions are
      * handled.
      */
     public void awaitAndShutdown(){

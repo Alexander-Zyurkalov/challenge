@@ -1,6 +1,5 @@
 package com.raisin.zyurkalov.challenge.services;
 
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

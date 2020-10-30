@@ -1,12 +1,12 @@
 package com.raisin.zyurkalov.challenge;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.Status;
+import com.raisin.zyurkalov.challenge.services.ExceptionsHolder;
 import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 

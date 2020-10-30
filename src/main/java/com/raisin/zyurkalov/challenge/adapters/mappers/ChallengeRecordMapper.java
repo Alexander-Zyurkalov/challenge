@@ -1,7 +1,7 @@
 package com.raisin.zyurkalov.challenge.adapters.mappers;
 
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
+import com.raisin.zyurkalov.challenge.services.ExceptionsHolder;
 
 /**
  * Since we deal with xml and json and in order to share code to handle xml- and json-payloads, I decided to add
