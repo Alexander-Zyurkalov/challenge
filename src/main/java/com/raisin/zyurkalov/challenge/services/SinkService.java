@@ -1,8 +1,8 @@
 package com.raisin.zyurkalov.challenge.services;
 
 import com.raisin.zyurkalov.challenge.entities.Kind;
-import com.raisin.zyurkalov.challenge.services.sink_service.Response;
-import com.raisin.zyurkalov.challenge.services.sink_service.Result;
+import com.raisin.zyurkalov.challenge.entities.sink_service.Response;
+import com.raisin.zyurkalov.challenge.entities.sink_service.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

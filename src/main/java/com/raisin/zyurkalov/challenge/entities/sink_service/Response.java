@@ -1,4 +1,4 @@
-package com.raisin.zyurkalov.challenge.services.sink_service;
+package com.raisin.zyurkalov.challenge.entities.sink_service;
 
 import com.raisin.zyurkalov.challenge.entities.Status;
 import lombok.AllArgsConstructor;
