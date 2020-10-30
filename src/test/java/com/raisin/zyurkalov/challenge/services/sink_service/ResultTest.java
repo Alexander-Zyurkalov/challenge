@@ -2,7 +2,7 @@ package com.raisin.zyurkalov.challenge.services.sink_service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.raisin.zyurkalov.challenge.services.Kind;
+import com.raisin.zyurkalov.challenge.entities.Kind;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,5 +1,6 @@
 package com.raisin.zyurkalov.challenge.services;
 
+import com.raisin.zyurkalov.challenge.entities.Kind;
 import com.raisin.zyurkalov.challenge.entities.Status;
 import com.raisin.zyurkalov.challenge.services.sink_service.Response;
 import com.raisin.zyurkalov.challenge.services.sink_service.Result;

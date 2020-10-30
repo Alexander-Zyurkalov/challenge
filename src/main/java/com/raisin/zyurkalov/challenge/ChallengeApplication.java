@@ -1,7 +1,11 @@
 package com.raisin.zyurkalov.challenge;
 
+import com.raisin.zyurkalov.challenge.entities.Kind;
 import com.raisin.zyurkalov.challenge.entities.Status;
-import com.raisin.zyurkalov.challenge.services.*;
+import com.raisin.zyurkalov.challenge.services.ExceptionsHandler;
+import com.raisin.zyurkalov.challenge.services.SinkService;
+import com.raisin.zyurkalov.challenge.services.SolutionService;
+import com.raisin.zyurkalov.challenge.services.Source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;

@@ -1,4 +1,4 @@
-package com.raisin.zyurkalov.challenge.services;
+package com.raisin.zyurkalov.challenge.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
