@@ -46,7 +46,7 @@ class ConcreteJsonSourceTest {
                 .filter(e -> e instanceof JsonProcessingException)
                 .subscribe((Exception x) -> atomicInteger.incrementAndGet());
 
-        ConcreteSource concreteSource = new FakeConcreteXmlSource();
+        ConcreteSource concreteSource = new FakeConcreteJsonSource();
 
 
         concreteSource.setExceptionHolder(exceptionsHolder);
