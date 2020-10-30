@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
+import reactor.util.function.Tuple2;
 
 /**
  * This clas combines to sources, both A and B into one stream so that we can have entities form endpoint A and then
@@ -31,7 +32,10 @@ public class CombinedSource implements Source{
             return Flux.empty();
         Flux<ChallengeRecord> flux = sourceA.getChallengeRecords();
         if (sourceB != null)
-            return flux.mergeWith(sourceB.getChallengeRecords());
+            return flux.zipWith(sourceB.getChallengeRecords())
+                    .flatMap(
+                            (Tuple2<ChallengeRecord,ChallengeRecord> tuple2) -> Flux.fromArray(tuple2.toArray()))
+                    .map(o -> (ChallengeRecord)o);
         return flux;
     }
 

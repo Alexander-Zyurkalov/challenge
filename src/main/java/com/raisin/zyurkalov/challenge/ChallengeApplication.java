@@ -49,6 +49,7 @@ public class ChallengeApplication {
                             solutionService.addRecord(record);
                     }
             );
+//            disposable.wait();
 
             while (!disposable.isDisposed() || solutionService.getNumberOfJoined() > 0) {
                 solutionService.processJointed().forEach(
