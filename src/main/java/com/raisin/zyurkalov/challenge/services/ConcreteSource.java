@@ -1,7 +1,7 @@
 package com.raisin.zyurkalov.challenge.services;
 
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
-import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
+import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
 import com.raisin.zyurkalov.challenge.entities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ public class ConcreteSource implements Source {
         this.url = url;
     }
 
-    ChallengeRecordJsonMapper mapper;
+    ChallengeRecordMapper mapper;
     ExceptionsHolder exceptionsHolder;
 
     @Autowired
-    public void setMapper(ChallengeRecordJsonMapper mapper) {
+    public void setMapper(ChallengeRecordMapper mapper) {
         this.mapper = mapper;
     }
 

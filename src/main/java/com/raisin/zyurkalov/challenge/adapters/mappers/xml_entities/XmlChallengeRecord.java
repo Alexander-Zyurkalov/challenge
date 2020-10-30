@@ -13,4 +13,7 @@ import lombok.NoArgsConstructor;
 public class XmlChallengeRecord {
     @JacksonXmlProperty
     Id id;
+
+    @JacksonXmlProperty()
+    String done;
 }

@@ -47,12 +47,14 @@ public class ChallengeRecordXmlMapper implements ChallengeRecordMapper {
     }
 
     private ChallengeRecord toChallengeRecord(XmlChallengeRecord xmlChallengeRecord) {
-        return new ChallengeRecord(xmlChallengeRecord.getId().value, null);
+        Status status = xmlChallengeRecord.getDone() == null ? null : Status.valueOf(xmlChallengeRecord.getDone());
+        return new ChallengeRecord(xmlChallengeRecord.getId().value, status);
     }
 
     private XmlChallengeRecord toXmlChallengeRecord(ChallengeRecord object) {
+        String status = object.getStatus() == null? "" : object.getStatus().toString();
         return new XmlChallengeRecord(
-                new Id(object.getId())
+                new Id(object.getId()), status
         );
     }
 
