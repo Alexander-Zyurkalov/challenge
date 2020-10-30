@@ -3,10 +3,7 @@ package com.raisin.zyurkalov.challenge;
 import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordJsonMapper;
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordXmlMapper;
-import com.raisin.zyurkalov.challenge.services.CombinedSource;
-import com.raisin.zyurkalov.challenge.services.ConcreteSource;
-import com.raisin.zyurkalov.challenge.services.SinkService;
-import com.raisin.zyurkalov.challenge.services.SolutionService;
+import com.raisin.zyurkalov.challenge.services.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,5 +59,10 @@ public class ChallengeApplicationConfiguration {
     @Bean
     public SinkService getSinkService() {
         return new SinkService(URL_SINK);
+    }
+
+    @Bean
+    ExceptionsHandler errorHandler(){
+        return new ExceptionsHandler();
     }
 }

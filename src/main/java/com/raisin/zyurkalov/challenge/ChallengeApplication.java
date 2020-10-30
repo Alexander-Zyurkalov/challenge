@@ -1,11 +1,7 @@
 package com.raisin.zyurkalov.challenge;
 
-import com.raisin.zyurkalov.challenge.adapters.ExceptionsHolder;
 import com.raisin.zyurkalov.challenge.entities.Status;
-import com.raisin.zyurkalov.challenge.services.Kind;
-import com.raisin.zyurkalov.challenge.services.SinkService;
-import com.raisin.zyurkalov.challenge.services.SolutionService;
-import com.raisin.zyurkalov.challenge.services.Source;
+import com.raisin.zyurkalov.challenge.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -23,15 +19,14 @@ public class ChallengeApplication {
     Source source;
 
     @Autowired
-    ExceptionsHolder exceptionsHolder;
-
-
-    @Autowired
     SolutionService solutionService;
 
 
     @Autowired
     SinkService sinkService;
+
+    @Autowired
+    ExceptionsHandler exceptionsHandler;
 
     public static void main(String[] args) {
         new SpringApplicationBuilder().sources(ChallengeApplication.class).web(WebApplicationType.NONE).run(args);
@@ -42,6 +37,7 @@ public class ChallengeApplication {
     @Bean
     CommandLineRunner run() {
         return (evt) -> {
+            exceptionsHandler.handle();
 
             Disposable disposable = source.getChallengeRecords().subscribe(
                     record -> {
@@ -66,7 +62,7 @@ public class ChallengeApplication {
             );
 
 
-            exceptionsHolder.awaitAndShutdown();
+            exceptionsHandler.awaitAndShutdown();
         };
 
     }

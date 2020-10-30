@@ -49,9 +49,6 @@ public class ConcreteSource implements Source {
                                     );
                             if (record.getStatus() != Status.DONE)
                                 x.next(record);
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                            x.complete();
                         } catch (Exception e) {
                             exceptionsHolder.addException(e);
                             x.complete();
