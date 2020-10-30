@@ -2,16 +2,13 @@ package com.raisin.zyurkalov.challenge.services;
 
 import com.raisin.zyurkalov.challenge.adapters.mappers.ChallengeRecordMapper;
 import com.raisin.zyurkalov.challenge.entities.ChallengeRecord;
-import com.raisin.zyurkalov.challenge.entities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
 
 @Component
-public class ConcreteSource implements Source {
+public class ConcreteSource {
 
     private String url;
 
@@ -27,36 +24,14 @@ public class ConcreteSource implements Source {
     }
 
     @Autowired
-    @Override
     public void setExceptionHolder(ExceptionsHolder exceptionsHolder) {
         this.exceptionsHolder = exceptionsHolder;
     }
 
 
-    @Override
-    public Flux<ChallengeRecord> getChallengeRecords() {
+    public Mono<ChallengeRecord> getChallengeRecords() {
 
-        return Flux.create(
-                x -> {
-                    ChallengeRecord record = null;
-                    do {
-                        try {
-                            record = requestToUrl()
-                                    .map(str -> mapper.mapToObject(str))
-                                    .blockOptional().orElse(
-                                            new ChallengeRecord("", Status.FAIL)
-                                    );
-                            if (record.getStatus() != Status.DONE)
-                                x.next(record);
-                        } catch (Exception e) {
-                            exceptionsHolder.addException(e);
-                            x.complete();
-                        }
-                    } while (!x.isCancelled() && record != null && record.getStatus() != Status.DONE);
-                    x.complete();
-                },
-                FluxSink.OverflowStrategy.BUFFER
-        );
+        return requestToUrl().map(mapper::mapToObject);
     }
 
     protected Mono<String> requestToUrl() {
@@ -64,5 +39,18 @@ public class ConcreteSource implements Source {
                 .bodyToMono(String.class);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConcreteSource)) return false;
 
+        ConcreteSource source = (ConcreteSource) o;
+
+        return url != null ? url.equals(source.url) : source.url == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return url != null ? url.hashCode() : 0;
+    }
 }
