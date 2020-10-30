@@ -42,7 +42,6 @@ class ChallengeRecordMapperTest {
 
 
     }
-    // TODO add error tests for xml
 
     @Test
     void handlingErrorsTest() {

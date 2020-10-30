@@ -26,6 +26,10 @@ public class ExceptionsHandler {
                 });
     }
 
+    /**
+     * Since the handler is asynchronous, it might be usefull to call this method to wait before all the exceptions are
+     * handled.
+     */
     public void awaitAndShutdown(){
         exceptionsHolder.awaitAndShutdown();
     }
