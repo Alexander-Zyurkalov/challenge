@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
+/**
+ * This clas combines to sources, both A and B into one stream so that we can have entities form endpoint A and then
+ * from endpoint B one after another
+ */
 @Component
 public class CombinedSource implements Source{
     private ExceptionsHolder exceptionHolder;

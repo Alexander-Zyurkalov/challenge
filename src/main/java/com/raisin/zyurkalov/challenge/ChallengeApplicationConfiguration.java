@@ -61,6 +61,11 @@ public class ChallengeApplicationConfiguration {
     }
 
     @Bean
+    public String getUrlSink(){
+        return URL_SINK;
+    }
+
+    @Bean
     ExceptionsHandler errorHandler(){
         return new ExceptionsHandler();
     }
